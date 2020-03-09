@@ -4,7 +4,7 @@
 
 **List of dependencies**
 
-1. commitlint
+### 1. commitlint
 
 ```
 yarn add @commitlint/cli @commitlint/config-conventional -D
@@ -12,9 +12,9 @@ yarn add @commitlint/cli @commitlint/config-conventional -D
 echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 ```
 
-> or copy commitlint.config.js on another project
+> or copy commitlint.config.js from another project
 
-2. commitzen
+### 2. commitzen
 
 ```
 yarn add commitizen -D
@@ -22,7 +22,7 @@ yarn add commitizen -D
 yarn commitizen init cz-conventional-changelog --yarn --dev --exact
 ```
 
-3. husky
+### 3. husky
 
 ```
 yarn add husky -D
@@ -36,11 +36,30 @@ Add to packege.json:
   },
 ```
 
-4. jest
-5. dotenv
-6. eslint
-7. prettier
-8. editorconfig
+### 4. jest / supertest
+
+> **Inside each project (backend, frontend, mobile)**
+
+```
+yarn add jest supertest -D
+
+Create __tests__ folder
+Create __tests__/integration and __tests_/unit folders
+
+yarn jest --init
+
+Configure jest.config.js or copy from another project
+```
+
+### 5. Faker / FactoryGirl
+
+### 6. dotenv
+
+### 7. eslint
+
+### 8. prettier
+
+### 9. editorconfig
 
 ### Copy files
 
