@@ -55,11 +55,54 @@ Configure jest.config.js or copy from another project
 
 ### 6. dotenv
 
+```
+yarn add dotenv
+
+Create .env || .env.test files or copy from another projects
+```
+
 ### 7. eslint
+
+```
+yarn add eslint -D
+
+yarn eslint --init
+
+Modify .eslintrc.json || Copy from another project
+
+VSCode extension
+```
 
 ### 8. prettier
 
+```
+VSCode extension
+
+"prettier.eslintIntegration": true  _is  deprecated_
+
+```
+
 ### 9. editorconfig
+
+```
+VSCode extension
+
+Right button to generate .editorconfig
+
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+
+```
 
 ### Copy files
 
