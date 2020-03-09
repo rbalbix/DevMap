@@ -1,8 +1,72 @@
+# Project Configuration
+
+## Environment
+
+**List of dependencies**
+
+1. commitlint
+
+```
+yarn add @commitlint/cli @commitlint/config-conventional -D
+
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+```
+
+> or copy commitlint.config.js on another project
+
+2. commitzen
+
+```
+yarn add commitizen -D
+
+yarn commitizen init cz-conventional-changelog --yarn --dev --exact
+```
+
+3. husky
+
+```
+yarn add husky -D
+
+Add to packege.json:
+"husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+```
+
+4. jest
+5. dotenv
+6. eslint
+7. prettier
+8. editorconfig
+
+### Copy files
+
+.gitignore
+commitlint.config.js
+
+```
+code example
+yard add
+```
+
+Quote example
+
+> Inner quote
+
+---
+
+---
+
+---
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+_We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket._
 
 ---
 
@@ -13,7 +77,7 @@ You’ll start by editing this README file to learn how to edit a file in Bitbuc
 1. Click **Source** on the left side.
 2. Click the README.md link from the list of files.
 3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
+4. Delete the following text: _Delete this line to make a change to the README from Bitbucket._
 5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
 6. Go back to the **Source** page.
 
