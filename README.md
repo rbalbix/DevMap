@@ -61,6 +61,8 @@ See the need
 
 ### 6. [dotenv](https://www.npmjs.com/package/dotenv)
 
+> **Inside each project (backend, frontend, mobile)**
+
 ```
 yarn add dotenv
 
@@ -111,4 +113,19 @@ insert_final_newline = true
 
 ```
 .gitignore (from another project)
+```
+
+### 11. Define Structure
+
+```
+1. Create folders:
+
+  ** BACKEND
+  ./src
+      /app
+        /controllers
+        /models
+    app.js
+    routes.js (one or more?)
+    server.js
 ```

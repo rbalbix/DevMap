@@ -21,10 +21,10 @@ module.exports = {
   collectCoverage: true,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ["src/**", "!src/database/migrations/**"],
+  collectCoverageFrom: ['src/**', '!src/database/migrations/**'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "__tests__/coverage",
+  coverageDirectory: '__tests__/coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -132,7 +132,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "node",
+  testEnvironment: 'node',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -142,7 +142,7 @@ module.exports = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    "**/__tests__/**/*.test.js?(x)"
+    '**/__tests__/**/*.test.js?(x)'
     // "**/?(*.)+(spec|test).[tj]s?(x)"
   ]
 
