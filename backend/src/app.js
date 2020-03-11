@@ -15,7 +15,6 @@ class AppController {
 
     this.middlewares();
     this.routes();
-    this.database();
   }
 
   middlewares() {
@@ -25,30 +24,6 @@ class AppController {
 
   routes() {
     this.express.use(require('./routes'));
-  }
-
-  database() {
-    // Verify the DB environment
-    if (process.env.NODE_ENV == 'production') {
-      mongoose.connect(
-        'mongodb+srv://omni:omni@cluster0-kj5ow.mongodb.net/omni-devmap?retryWrites=true&w=majority',
-        {
-          useNewUrlParser: true,
-          useUnifiedTopology: true
-        }
-      );
-    } else {
-      mongoose.connect(
-        `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`,
-        {
-          useNewUrlParser: true,
-          useUnifiedTopology: true
-        },
-        () => {
-          console.log('connected.');
-        }
-      );
-    }
   }
 }
 
