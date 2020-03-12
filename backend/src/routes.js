@@ -1,11 +1,8 @@
+const DevController = require('./app/controllers/DevController');
+
 const routes = require('express').Router();
 
-routes.get('/devs', async (req, res) => {
-  return res.json({ message: 'Hello World!' });
-});
-
-routes.post('/devs', async (req, res) => {
-  return res.json({ message: 'DEV' });
-});
+routes.get('/devs', DevController.index);
+routes.post('/devs', DevController.store);
 
 module.exports = routes;
