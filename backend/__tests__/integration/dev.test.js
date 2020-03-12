@@ -1,9 +1,9 @@
 const request = require('supertest');
 
 const app = require('../../src/app');
-const mongoDB = require('../database/mongoDB');
-// const truncate = require('../utils/truncate');
-// const factory = require('../factories');
+const mongoDB = require('../../src/database');
+
+const factory = require('../factories');
 
 // Categoria dos testes
 describe('Devs', () => {
@@ -21,18 +21,16 @@ describe('Devs', () => {
     expect(response.status).toBe(200);
   });
 
-  it('should not found the user email', async () => {
-    const Dev = mongoose.model('Dev', { name: String });
-
-    const dev = new Dev({ name: 'Ricardo' });
-    dev.save().then(() => console.log('Foi'));
+  it('should create a Dev /devs (POST)', async () => {
+    const dev = await factory.create('Dev');
 
     const response = await request(app)
       .post('/devs')
       .send({
-        name: 'Ricardo'
+        dev
       });
 
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('name');
   });
 });

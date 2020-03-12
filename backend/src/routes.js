@@ -5,7 +5,7 @@ routes.get('/devs', async (req, res) => {
 });
 
 routes.post('/devs', async (req, res) => {
-  return res.json({ message: 'POST' });
+  return res.json({ message: 'DEV' });
 });
 
 module.exports = routes;
