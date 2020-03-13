@@ -72,4 +72,27 @@ describe('Devs', () => {
     expect(response.status).toBe(200);
     expect(response.body._id).toBe(duplicate.body._id);
   });
+
+  it('should return a Dev', async () => {
+    const dev = {
+      github_username: 'rbalbix',
+      techs: 'React, Node, React Native',
+      latitude: -22.8945253,
+      longitude: -43.1843926
+    };
+
+    await request(app)
+      .post('/devs')
+      .send(dev);
+
+    const response = await request(app).get('/devs');
+
+    expect(response.status).toBe(200);
+    expect(response.body[0]).toHaveProperty('name');
+    expect(response.body[0]).toHaveProperty('github_username');
+    expect(response.body[0]).toHaveProperty('bio');
+    expect(response.body[0]).toHaveProperty('avatar_url');
+    expect(response.body[0]).toHaveProperty('techs');
+    expect(response.body[0]).toHaveProperty('location');
+  });
 });

@@ -3,7 +3,9 @@ const Dev = require('../models/Dev');
 
 module.exports = {
   async index(req, res) {
-    return res.json({ message: 'Hello World!' });
+    const devs = await Dev.find();
+
+    return res.json(devs);
   },
 
   async store(req, res) {
