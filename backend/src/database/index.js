@@ -16,11 +16,12 @@ module.exports = {
           useFindAndModify: false,
           useCreateIndex: true,
           useUnifiedTopology: true
-        },
-        (err, dbref) => {
-          if (!err) console.log('Connected');
-          else console.log(err);
         }
+        // ,
+        // (err, dbref) => {
+        //   if (!err) console.log('Connected');
+        //   else console.log(err);
+        // }
       );
     } else {
       mongoose.connect(
@@ -30,11 +31,12 @@ module.exports = {
           useFindAndModify: false,
           useCreateIndex: true,
           useUnifiedTopology: true
-        },
-        (err, dbref) => {
-          if (!err) console.log('Connected');
-          else console.log(err);
         }
+        // ,
+        // (err, dbref) => {
+        //   if (!err) console.log('Connected');
+        //   else console.log(err);
+        // }
       );
     }
   },

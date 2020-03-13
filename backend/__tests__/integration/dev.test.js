@@ -28,9 +28,17 @@ describe('Devs', () => {
   });
 
   it('should create a Dev /devs (POST)', async () => {
-    const dev = await factory.build('Dev', {
-      github_username: 'rbalbix'
-    });
+    // const dev = await factory.build('Dev', {
+    //   github_username: 'rbalbix',
+    //   technologies: 'React, Node, React Native'
+    // });
+
+    const dev = {
+      github_username: 'rbalbix',
+      techs: 'React, Node, React Native',
+      latitude: -22.8945253,
+      longitude: -43.1843926
+    };
 
     const response = await request(app)
       .post('/devs')
@@ -42,5 +50,6 @@ describe('Devs', () => {
     expect(response.body).toHaveProperty('bio');
     expect(response.body).toHaveProperty('avatar_url');
     expect(response.body).toHaveProperty('techs');
+    expect(response.body).toHaveProperty('location');
   });
 });

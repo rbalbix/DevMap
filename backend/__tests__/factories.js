@@ -3,11 +3,8 @@ const { factory } = require('factory-girl');
 const dev = require('../src/app/models/Dev');
 
 factory.define('Dev', dev, {
-  // name: faker.name.findName(),
   github_username: faker.internet.userName()
-  // bio: faker.lorem.sentence(),
-  // avatar_url: faker.internet.avatar(),
-  // techs: faker.lorem.words(3)
+  // techs: faker.lorem.words(3).replace(/ /gi, ',')
 });
 
 module.exports = factory;
