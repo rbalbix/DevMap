@@ -52,4 +52,24 @@ describe('Devs', () => {
     expect(response.body).toHaveProperty('techs');
     expect(response.body).toHaveProperty('location');
   });
+
+  it('should not create an existent Dev', async () => {
+    const dev = {
+      github_username: 'rbalbix',
+      techs: 'React, Node, React Native',
+      latitude: -22.8945253,
+      longitude: -43.1843926
+    };
+
+    const response = await request(app)
+      .post('/devs')
+      .send(dev);
+
+    const duplicate = await request(app)
+      .post('/devs')
+      .send(dev);
+
+    expect(response.status).toBe(200);
+    expect(response.body._id).toBe(duplicate.body._id);
+  });
 });

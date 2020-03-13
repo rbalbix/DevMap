@@ -10,29 +10,33 @@ module.exports = {
     try {
       const { github_username, techs, latitude, longitude } = req.body;
 
-      const apiResponse = await axios.get(
-        `https://api.github.com/users/${github_username}`
-      );
+      let dev = await Dev.findOne({ github_username });
 
-      const { name = login, bio, avatar_url } = apiResponse.data;
+      if (!dev) {
+        const apiResponse = await axios.get(
+          `https://api.github.com/users/${github_username}`
+        );
 
-      const techsArray = techs.split(',').map(tech => tech.trim());
+        const { name = login, bio, avatar_url } = apiResponse.data;
 
-      const location = {
-        type: 'Point',
-        coordinates: [longitude, latitude]
-      };
+        const techsArray = techs.split(',').map(tech => tech.trim());
 
-      const response = await Dev.create({
-        name,
-        github_username,
-        bio,
-        avatar_url,
-        techs: techsArray,
-        location
-      });
+        const location = {
+          type: 'Point',
+          coordinates: [longitude, latitude]
+        };
 
-      return res.json(response);
+        dev = await Dev.create({
+          name,
+          github_username,
+          bio,
+          avatar_url,
+          techs: techsArray,
+          location
+        });
+      }
+
+      return res.json(dev);
     } catch (err) {
       console.log(err);
       return res.status(500); //.send(err);
