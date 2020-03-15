@@ -43,7 +43,7 @@ Add to packege.json:
 > **Inside each project (backend, frontend, mobile)**
 
 ```
-yarn add jest supertest -D
+yarn add jest supertest @types/jest -D
 
 Create __tests__ folder
 Create __tests__/integration and __tests_/unit folders
