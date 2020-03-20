@@ -14,8 +14,12 @@ import {
 } from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import api from '../services/api';
+
 function Main({ navigation }) {
+  const [devs, setDevs] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
+  const [techs, setTechs] = useState('');
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -40,55 +44,59 @@ function Main({ navigation }) {
     loadInitialPosition();
   }, []);
 
+  async function loadDevs() {
+    const { latitude, longitude } = currentRegion;
+
+    const response = await api.get('/search', {
+      params: {
+        latitude,
+        longitude,
+        techs
+      }
+    });
+    setDevs(response.data);
+  }
+
+  function handleRegionChanged(region) {
+    setCurrentRegion(region);
+  }
+
   if (!currentRegion) {
     return null;
   }
 
   return (
     <>
-      <MapView initialRegion={currentRegion} style={styles.map}>
-        <Marker coordinate={{ latitude: -22.903878, longitude: -43.102818 }}>
-          <Image
-            style={styles.avatar}
-            source={{
-              uri:
-                'https://avatars0.githubusercontent.com/u/38765245?s=400&u=7fc0522151d797c0ac7986b49348d295b5574d95&v=4'
-            }}
-          />
-          <Callout
-            onPress={() => {
-              // navegação
-              navigation.navigate('Profile', { github_username: 'rbalbix' });
+      <MapView
+        onRegionChangeComplete={handleRegionChanged}
+        initialRegion={currentRegion}
+        style={styles.map}
+      >
+        {devs.map(dev => (
+          <Marker
+            key={dev._id}
+            coordinate={{
+              latitude: dev.location.coordinates[1],
+              longitude: dev.location.coordinates[0]
             }}
           >
-            <View style={styles.callout}>
-              <Text style={styles.devName}>Família Linda</Text>
-              <Text style={styles.devBio}>Bio da Família Linda</Text>
-              <Text style={styles.devTechs}>Paris, Orlando, Niterói</Text>
-            </View>
-          </Callout>
-        </Marker>
-        <Marker coordinate={{ latitude: -22.910242, longitude: -43.101466 }}>
-          <Image
-            style={styles.avatar}
-            source={{
-              uri:
-                'https://avatars0.githubusercontent.com/u/38765245?s=400&u=7fc0522151d797c0ac7986b49348d295b5574d95&v=4'
-            }}
-          />
-          <Callout
-            onPress={() => {
-              // navegação
-              navigation.navigate('Profile', { github_username: 'rbalbix' });
-            }}
-          >
-            <View style={styles.callout}>
-              <Text style={styles.devName}>Família Linda</Text>
-              <Text style={styles.devBio}>Bio da Família Linda</Text>
-              <Text style={styles.devTechs}>Paris, Orlando, Niterói</Text>
-            </View>
-          </Callout>
-        </Marker>
+            <Image style={styles.avatar} source={{ uri: dev.avatar_url }} />
+            <Callout
+              onPress={() => {
+                // navegação
+                navigation.navigate('Profile', {
+                  github_username: dev.github_username
+                });
+              }}
+            >
+              <View style={styles.callout}>
+                <Text style={styles.devName}>{dev.name}</Text>
+                <Text style={styles.devBio}>{dev.bio}</Text>
+                <Text style={styles.devTechs}>{dev.techs.join(', ')}</Text>
+              </View>
+            </Callout>
+          </Marker>
+        ))}
       </MapView>
       <View style={styles.searchForm}>
         <TextInput
@@ -97,8 +105,10 @@ function Main({ navigation }) {
           placeholderTextColor="#999"
           autoCapitalize="words"
           autoCorrect={false}
+          value={techs}
+          onChangeText={setTechs}
         />
-        <TouchableOpacity onPress={() => {}} style={styles.loadButton}>
+        <TouchableOpacity onPress={loadDevs} style={styles.loadButton}>
           <MaterialIcons name="my-location" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
@@ -139,7 +149,7 @@ const styles = StyleSheet.create({
 
   searchForm: {
     position: 'absolute',
-    bottom: 20,
+    top: 20,
     left: 20,
     right: 20,
     zIndex: 5,
